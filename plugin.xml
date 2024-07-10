@@ -9,7 +9,7 @@
     <dependency id="com.outsystems.firebase.cloudmessaging" url="https://github.com/OutSystems/cordova-outsystems-firebase-cloud-messaging.git#2.0.0"/>
     <platform name="android">
         <hook type="before_plugin_install" src="hooks/android_set_api_url.js"/>
-        <hook type="before_compile" src="hooks/set_kotlin_version.js"/>
+        <!-- <hook type="before_compile" src="hooks/set_kotlin_version.js"/> -->
         <!--<hook type="after_plugin_install" src="hooks/android_patch_mainactivity.js"/>-->
         <hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
         <hook type="after_plugin_install" src="hooks/android_adjust_package_name.js"/>
@@ -25,11 +25,11 @@
         <source-file src="src/android/AcceptReceiver.java" target-dir="src/com/outsystems/experts/forgerockplugin" />
         <source-file src="src/android/DenyReceiver.java" target-dir="src/com/outsystems/experts/forgerockplugin" />
         <source-file src="src/android/FcmService.java" target-dir="src/com/outsystems/experts/forgerockplugin" />
-        
+
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
         </config-file>
-            <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[@android:name='MainActivity']">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[@android:name='MainActivity']">
             <intent-filter>
                 <action android:name="com.outsystems.experts.forgerocksample.PUSH_NOTIFICATION" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -50,11 +50,8 @@
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            
-            <service
-                android:name="com.outsystems.experts.forgerockplugin.FcmService"
-                android:enabled="true"
-                android:exported="false">
+
+            <service android:name="com.outsystems.experts.forgerockplugin.FcmService" android:enabled="true" android:exported="false">
                 <intent-filter>
                     <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 </intent-filter>
@@ -68,13 +65,13 @@
         <hook type="before_prepare" src="hooks/comment_objc_class.js"/>
         <hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
         <hook type="after_plugin_add" src="hooks/add_swift_support.js" />
-        
+
         <podspec>
-          <pods use-frameworks="true">
-            <pod name="FRAuthenticator" spec="~> 4.1.0" />
-          </pods>
-        </podspec>  
-        
+            <pods use-frameworks="true">
+                <pod name="FRAuthenticator" spec="~> 4.1.0" />
+            </pods>
+        </podspec>
+
         <config-file parent="/*" target="config.xml">
             <feature name="ForgeRockPlugin">
                 <param name="ios-package" value="ForgeRockPlugin" />
